@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "outDir": "../.."
+  },
+  "files": [
+    "index.ts"
+  ]
+}

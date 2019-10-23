@@ -1,0 +1,33 @@
+{
+  "name": "format-codex",
+  "version": "0.1.0",
+  "description": "Core library for a file format handling system.",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "crc32.wasm"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsbuild": "tsc -p src/ts",
+    "asbuild": "asc src/as/crc32.ts -b crc32.wasm -t crc32.wat --validate --optimize",
+    "build": "npm run asbuild && npm run tsbuild",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/format-codex/format-codex.git"
+  },
+  "author": "Duncan Cross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/format-codex/format-codex/issues"
+  },
+  "homepage": "https://github.com/format-codex/format-codex#readme",
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "assemblyscript": "github:AssemblyScript/assemblyscript",
+    "typescript": "^3.6.4"
+  }
+}

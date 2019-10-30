@@ -643,7 +643,7 @@ abstract class FixedLengthFormatImpl<T> implements NonGreedyFormat<T> {
   }
 }
 
-export const UINT8 = new (class extends FixedLengthFormatImpl<number> {
+export const UINT8:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(1); }
   read(source: Buffer, offset: number): number { return source[offset]; }
   write(target: Buffer, offset: number, value: number): void { target[offset] = value; }
@@ -651,7 +651,7 @@ export const UINT8 = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return 0xff; }
 })();
 
-export const INT8 = new (class extends FixedLengthFormatImpl<number> {
+export const INT8:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(1); }
   read(source: Buffer, offset: number): number { return source[offset] << 24 >> 24; }
   write(target: Buffer, offset: number, value: number): void { target[offset] = value; }
@@ -659,7 +659,7 @@ export const INT8 = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return  0x7f; }
 })();
 
-export const UINT8_CLAMPED = new (class extends FixedLengthFormatImpl<number> {
+export const UINT8_CLAMPED:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(1); }
   read(source: Buffer, offset: number): number { return source[offset]; }
   write(target: Buffer, offset: number, value: number): void { target[offset] = Math.min(255, Math.max(0, value)); }
@@ -667,7 +667,7 @@ export const UINT8_CLAMPED = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return 0xff; }
 })();
 
-export const UINT16BE = new (class extends FixedLengthFormatImpl<number> {
+export const UINT16BE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(2); }
   read(source: Buffer, offset: number): number { return source.readUInt16BE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeUInt16BE(value, offset); }
@@ -675,7 +675,7 @@ export const UINT16BE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return 0xffff; }
 })();
 
-export const UINT16LE = new (class extends FixedLengthFormatImpl<number> {
+export const UINT16LE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(2); }
   read(source: Buffer, offset: number): number { return source.readUInt16LE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeUInt16LE(value, offset); }
@@ -683,7 +683,7 @@ export const UINT16LE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return 0xffff; }
 })();
 
-export const INT16BE = new (class extends FixedLengthFormatImpl<number> {
+export const INT16BE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(2); }
   read(source: Buffer, offset: number): number { return source.readInt16BE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeInt16BE(value, offset); }
@@ -691,7 +691,7 @@ export const INT16BE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return  0x7fff; }
 })();
 
-export const INT16LE = new (class extends FixedLengthFormatImpl<number> {
+export const INT16LE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(2); }
   read(source: Buffer, offset: number): number { return source.readInt16LE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeInt16LE(value, offset); }
@@ -699,7 +699,7 @@ export const INT16LE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return  0x7fff; }
 })();
 
-export const UINT32BE = new (class extends FixedLengthFormatImpl<number> {
+export const UINT32BE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(4); }
   read(source: Buffer, offset: number): number { return source.readUInt32BE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeUInt32BE(value, offset); }
@@ -707,7 +707,7 @@ export const UINT32BE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return 0xffffffff; }
 })();
 
-export const UINT32LE = new (class extends FixedLengthFormatImpl<number> {
+export const UINT32LE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(4); }
   read(source: Buffer, offset: number): number { return source.readUInt32LE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeUInt32LE(value, offset); }
@@ -715,7 +715,7 @@ export const UINT32LE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return 0xffffffff; }
 })();
 
-export const INT32BE = new (class extends FixedLengthFormatImpl<number> {
+export const INT32BE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(4); }
   read(source: Buffer, offset: number): number { return source.readInt32BE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeInt32BE(value, offset); }
@@ -723,7 +723,7 @@ export const INT32BE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return  0x7fffffff; }
 })();
 
-export const INT32LE = new (class extends FixedLengthFormatImpl<number> {
+export const INT32LE:RangedFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(4); }
   read(source: Buffer, offset: number): number { return source.readInt32LE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeInt32LE(value, offset); }
@@ -731,31 +731,31 @@ export const INT32LE = new (class extends FixedLengthFormatImpl<number> {
   get maxValue() { return  0x7fffffff; }
 })();
 
-export const FLOAT32BE = new (class extends FixedLengthFormatImpl<number> {
+export const FLOAT32BE:NonGreedyFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(4); }
   read(source: Buffer, offset: number): number { return source.readFloatBE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeFloatBE(value, offset); }
 })();
 
-export const FLOAT32LE = new (class extends FixedLengthFormatImpl<number> {
+export const FLOAT32LE:NonGreedyFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(4); }
   read(source: Buffer, offset: number): number { return source.readFloatLE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeFloatLE(value, offset); }
 })();
 
-export const FLOAT64BE = new (class extends FixedLengthFormatImpl<number> {
+export const FLOAT64BE:NonGreedyFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(8); }
   read(source: Buffer, offset: number): number { return source.readDoubleBE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeDoubleBE(value, offset); }
 })();
 
-export const FLOAT64LE = new (class extends FixedLengthFormatImpl<number> {
+export const FLOAT64LE:NonGreedyFormat<number> = new (class extends FixedLengthFormatImpl<number> {
   constructor() { super(8); }
   read(source: Buffer, offset: number): number { return source.readDoubleLE(offset); }
   write(target: Buffer, offset: number, value: number): void { target.writeDoubleLE(value, offset); }
 })();
 
-export const BIGUINT64BE = new (class extends FixedLengthFormatImpl<bigint> {
+export const BIGUINT64BE:RangedFormat<bigint> = new (class extends FixedLengthFormatImpl<bigint> {
   constructor() { super(8); }
   read(source: Buffer, offset: number): bigint { return source.readBigUInt64BE(offset); }
   write(target: Buffer, offset: number, value: bigint): void { target.writeBigUInt64BE(value, offset); }
@@ -763,7 +763,7 @@ export const BIGUINT64BE = new (class extends FixedLengthFormatImpl<bigint> {
   get maxValue() { return 0xffffffffffffffffn; }
 })();
 
-export const BIGUINT64LE = new (class extends FixedLengthFormatImpl<bigint> {
+export const BIGUINT64LE:RangedFormat<bigint> = new (class extends FixedLengthFormatImpl<bigint> {
   constructor() { super(8); }
   read(source: Buffer, offset: number): bigint { return source.readBigUInt64LE(offset); }
   write(target: Buffer, offset: number, value: bigint): void { target.writeBigUInt64LE(value, offset); }
@@ -771,7 +771,7 @@ export const BIGUINT64LE = new (class extends FixedLengthFormatImpl<bigint> {
   get maxValue() { return 0xffffffffffffffffn; }
 })();
 
-export const BIGINT64BE = new (class extends FixedLengthFormatImpl<bigint> {
+export const BIGINT64BE:RangedFormat<bigint> = new (class extends FixedLengthFormatImpl<bigint> {
   constructor() { super(8); }
   read(source: Buffer, offset: number): bigint { return source.readBigInt64BE(offset); }
   write(target: Buffer, offset: number, value: bigint): void { target.writeBigInt64BE(value, offset); }
@@ -779,7 +779,7 @@ export const BIGINT64BE = new (class extends FixedLengthFormatImpl<bigint> {
   get maxValue() { return  0x7fffffffffffffffn; }
 })();
 
-export const BIGINT64LE = new (class extends FixedLengthFormatImpl<bigint> {
+export const BIGINT64LE:RangedFormat<bigint> = new (class extends FixedLengthFormatImpl<bigint> {
   constructor() { super(8); }
   read(source: Buffer, offset: number): bigint { return source.readBigInt64LE(offset); }
   write(target: Buffer, offset: number, value: bigint): void { target.writeBigInt64LE(value, offset); }

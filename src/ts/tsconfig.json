@@ -3,7 +3,9 @@
     "declaration": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
-    "outDir": "../.."
+    "outDir": "../..",
+    "target": "esnext",
+    "moduleResolution": "node"
   },
   "files": [
     "index.ts"

@@ -5,7 +5,8 @@
     "noImplicitAny": true,
     "outDir": "../..",
     "target": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "module": "commonjs"
   },
   "files": [
     "index.ts"

@@ -1,5 +1,6 @@
 *.js
-*.d.ts
+!typed-streams.js
+/*.d.ts
 *.wasm
 *.wasm.map
 *.wat

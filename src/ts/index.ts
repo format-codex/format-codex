@@ -906,3 +906,23 @@ export class ExactMatch<T> implements NonGreedyFormat<boolean> {
   }
 
 }
+
+export function encode<T>(format: Format<T>, value: T): Buffer {
+  const buf = Buffer.alloc(format.measureByteLength(value));
+  const offsetHolder = {offset:0};
+  format.encodeTo(buf, offsetHolder, value);
+  return buf;
+}
+
+export function decode<T>(format: Format<T>, buf: Buffer, offset:number = 0): T {
+  if (format.isGreedy == false) {
+    const offsetHolder = {offset};
+    return format.decodeFrom(buf, offsetHolder);
+  }
+  else {
+    const decoder = format.createDecodingStream();
+    decoder.end(offset === 0 ? buf : buf.subarray(offset));
+    return decoder.read();
+  }
+}
+

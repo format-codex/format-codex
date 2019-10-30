@@ -5,7 +5,8 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "crc32.wasm"
+    "crc32.wasm",
+    "typed-streams.js"
   ],
   "main": "index.js",
   "scripts": {

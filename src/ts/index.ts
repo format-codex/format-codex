@@ -1,7 +1,7 @@
 
 import { Transform, Duplex } from "./typed-streams";
 
-interface OffsetHolder {
+export interface OffsetHolder {
   offset: number;
 }
 

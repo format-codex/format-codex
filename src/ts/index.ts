@@ -1,5 +1,5 @@
 
-import { Transform, Duplex } from "./typed-streams";
+import { Transform, Duplex, Readable, Writable } from "./typed-streams";
 
 export interface OffsetHolder {
   offset: number;
@@ -926,3 +926,40 @@ export function decode<T>(format: Format<T>, buf: Buffer, offset:number = 0): T 
   }
 }
 
+
+export interface FileSystem<path_t = string> {
+  readFile(this: void, path: path_t): Promise<Buffer>;
+  writeFile(this: void, path: path_t, data:Buffer): Promise<void>;
+  createReadStream(this: void, path: path_t): Readable<Buffer>;
+  createWriteStream(this: void, path: path_t): Writable<Buffer>;
+}
+
+export interface FileSystemFormatHandler<path_t = string> {
+  load<T>(this: void, format: Format<T>, path: path_t): Promise<T>;
+  save<T>(this: void, format: Format<T>, path: path_t, value: T): Promise<void>;
+}
+
+function load<T, path_t>(this: void, fs:FileSystem<path_t>, format: Format<T>, path: path_t): Promise<T> {
+  if (format.isGreedy == true) {
+    return fs.readFile(path).then(buf => {
+      const decoder = format.createDecodingStream();
+      decoder.end(buf);
+      return decoder.read();
+    });
+  }
+  else {
+    return fs.readFile(path).then(buf => {
+      return format.decodeFrom(buf, {offset:0});
+    })
+  }
+}
+function save<T, path_t>(this: void, fs:FileSystem<path_t>, format: Format<T>, path: path_t, value: T): Promise<void> {
+  return fs.writeFile(path, encode(format, value));
+}
+
+export function createFileSystemInterface<path_t>(fs: FileSystem<path_t>): FileSystemFormatHandler<path_t> {
+  return {
+    load: load.bind(null, fs),
+    save: save.bind(null, fs),
+  };
+}

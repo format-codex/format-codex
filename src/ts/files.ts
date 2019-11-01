@@ -34,4 +34,4 @@ const FS: FileSystem = {
   },
 };
 
-export = FS;
+export = createFileSystemInterface(FS);

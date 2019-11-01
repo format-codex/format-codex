@@ -932,6 +932,9 @@ export interface FileSystem<path_t = string> {
   writeFile(this: void, path: path_t, data:Buffer): Promise<void>;
   createReadStream(this: void, path: path_t): Readable<Buffer>;
   createWriteStream(this: void, path: path_t): Writable<Buffer>;
+  getParentPath(this: void, childPath: path_t): Promise<path_t | null>;
+  eachChildPath(this: void, parentPath: path_t): AsyncIterator<path_t>;
+  getFileSize(this: void, path: path_t): Promise<number | bigint>;
 }
 
 export interface FileSystemFormatHandler<path_t = string> {

@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/format-codex/format-codex#readme",
   "devDependencies": {
-    "@types/node": "^12.12.3",
+    "@types/node": "^12.12.7",
     "assemblyscript": "github:AssemblyScript/assemblyscript",
     "typed-emitter": "^0.2.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   }
 }
